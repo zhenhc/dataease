@@ -65,7 +65,9 @@ public class DatasourceController {
     @ApiOperation("查询当前用户数据源")
     @GetMapping("/list/{type}")
     public List<DatasourceDTO> getDatasourceListByType(@PathVariable String type) throws Exception {
-        return getDatasourceList().stream().filter(datasourceDTO -> datasourceDTO.getType().equalsIgnoreCase(type)).collect(Collectors.toList());
+        return getDatasourceList().stream()
+                .filter(datasourceDTO -> datasourceDTO.getType().equalsIgnoreCase(type))
+                .collect(Collectors.toList());
     }
 
     @RequiresPermissions("datasource:read")
