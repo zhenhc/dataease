@@ -8,7 +8,6 @@ public class AuthConstants {
     public final static String USER_PERMISSION_CACHE_NAME = "users_permissions_info";
     public final static String ID_TOKEN_KEY = "IdToken";
 
-
     public final static String USER_LINK_NAME = "user_link";
     public final static String USER_DATASET_NAME = "user_dataset";
     public final static String USER_PANEL_NAME = "user_panel";

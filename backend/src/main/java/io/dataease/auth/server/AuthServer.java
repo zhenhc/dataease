@@ -10,6 +10,7 @@ import io.dataease.auth.entity.TokenInfo;
 import io.dataease.auth.service.AuthUserService;
 import io.dataease.auth.util.JWTUtils;
 import io.dataease.auth.util.RsaUtil;
+import io.dataease.commons.redis.RedisCache;
 import io.dataease.commons.utils.*;
 import io.dataease.controller.sys.request.LdapAddRequest;
 import io.dataease.exception.DataEaseException;
@@ -49,6 +50,9 @@ public class AuthServer implements AuthApi {
 
     @Autowired
     private SysUserService sysUserService;
+
+    @Autowired
+    private RedisCache redisCache;
 
     @Override
     public Object login(@RequestBody LoginDto loginDto) throws Exception {
@@ -117,6 +121,7 @@ public class AuthServer implements AuthApi {
         // 记录token操作时间
         result.put("token", token);
         ServletUtils.setToken(token);
+        redisCache.setCacheObject("dataease:token",token);
         authUserService.clearCache(user.getUserId());
         return result;
     }
